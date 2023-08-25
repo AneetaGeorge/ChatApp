@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/login.dart';
 
 void main() {
   runApp(const ChatApp());
@@ -12,21 +13,7 @@ class ChatApp extends StatelessWidget {
     return MaterialApp(
       title: "Chat App",
       theme: ThemeData(primarySwatch: Colors.deepPurple),
-      home: const LoginWidget());
+      home: const Login());
   }
 
-}
-
-class LoginWidget extends StatelessWidget {
-  const LoginWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(),
-        drawer: const Drawer(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => print('Button clicked!'),),
-        body: const Text('Hello World!'));
-  }
 }
