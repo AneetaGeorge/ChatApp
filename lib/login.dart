@@ -12,6 +12,7 @@ class Login extends StatelessWidget {
           onPressed: () => print('Button clicked!'),),
         body: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
                 'Let\'s sign you in!',
@@ -23,7 +24,8 @@ class Login extends StatelessWidget {
                 ),
               ),
               const Text(
-                'Welcome! You\'ve been missed!',
+                'Welcome!\n You\'ve been missed!',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.grey,
                   fontSize: 20,
