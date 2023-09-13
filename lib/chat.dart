@@ -3,11 +3,13 @@ import 'package:flutter_application/widgets/chatBubble.dart';
 import 'package:flutter_application/widgets/chatInput.dart';
 
 class Chat extends StatelessWidget {
-  final String username;
-  const Chat({super.key, required this.username});
+  const Chat({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    String username = ModalRoute.of(context)!.settings.arguments as String;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(

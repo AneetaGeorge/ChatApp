@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/chat.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});
@@ -14,9 +13,11 @@ class Login extends StatelessWidget {
       {
         print('Username: ${usernameController.text}');
         print('Login successful');
-        Navigator.push(
-            context, MaterialPageRoute(
-            builder: (context) => Chat(username: usernameController.text)));
+        Navigator.pushNamed(
+            context,
+            '/chat',
+          arguments: usernameController.text
+        );
       }
   }
 
