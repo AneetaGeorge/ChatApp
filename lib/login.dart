@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 class Login extends StatelessWidget {
   Login({super.key});
 
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
 
   void login()
   {
-    print('Username: ${usernameController.text}');
+    if (_formKey.currentState != null && _formKey.currentState!.validate())
+      {
+        print('Username: ${usernameController.text}');
+        print('Login successful');
+      }
   }
 
   @override
@@ -46,20 +51,40 @@ class Login extends StatelessWidget {
                 height: 200,
               ),
 
-              TextField(
-                controller: usernameController,
-                decoration: const InputDecoration(
-                    hintText: 'Username',
-                    border: OutlineInputBorder()
-                ),
-              ),
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty)
+                        {
+                          return "Username cannot be empty";
+                        }
+                            return null;
+                      },
+                      decoration: const InputDecoration(
+                          hintText: 'Username',
+                          border: OutlineInputBorder()
+                      ),
+                    ),
 
-              TextField(
-                obscureText: true,
-                controller: passwordController,
-                decoration: const InputDecoration(
-                    hintText: 'Password',
-                    border: OutlineInputBorder()
+                    TextFormField(
+                      obscureText: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty)
+                        {
+                          return "Password cannot be empty";
+                        }
+                        return null;
+                      },
+                      controller: passwordController,
+                      decoration: const InputDecoration(
+                          hintText: 'Password',
+                          border: OutlineInputBorder()
+                      ),
+                    ),
+                  ],
                 ),
               ),
 
@@ -67,7 +92,7 @@ class Login extends StatelessWidget {
                 onPressed: login,
                 child: const Text(
                   'Login'
-                ))
+                )),
             ],
           ),
         )
