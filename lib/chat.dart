@@ -23,7 +23,7 @@ class Chat extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: (){
-                Navigator.pop(context);
+                Navigator.pushReplacementNamed(context, '/');
               },
               icon: Icon(Icons.logout)
           )
