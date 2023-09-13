@@ -19,7 +19,9 @@ class Chat extends StatelessWidget {
         elevation: 0,
         actions: [
           IconButton(
-              onPressed: (){},
+              onPressed: (){
+                Navigator.pop(context);
+              },
               icon: Icon(Icons.logout)
           )
         ],

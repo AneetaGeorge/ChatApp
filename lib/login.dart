@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/chat.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});
@@ -7,19 +8,21 @@ class Login extends StatelessWidget {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  void login()
+  void login(context)
   {
     if (_formKey.currentState != null && _formKey.currentState!.validate())
       {
         print('Username: ${usernameController.text}');
         print('Login successful');
+        Navigator.push(
+            context, MaterialPageRoute(
+            builder: (context) => const Chat()));
       }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
         drawer: const Drawer(),
         floatingActionButton: FloatingActionButton(
           onPressed: () => print('Button clicked!'),),
@@ -89,10 +92,13 @@ class Login extends StatelessWidget {
               ),
 
               ElevatedButton(
-                onPressed: login,
-                child: const Text(
+                onPressed: (){
+                  login(context);
+                },
+                  child: const Text(
                   'Login'
-                )),
+                )
+              ),
             ],
           ),
         )
