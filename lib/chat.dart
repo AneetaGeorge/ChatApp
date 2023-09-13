@@ -3,15 +3,16 @@ import 'package:flutter_application/widgets/chatBubble.dart';
 import 'package:flutter_application/widgets/chatInput.dart';
 
 class Chat extends StatelessWidget {
-  const Chat({super.key});
+  final String username;
+  const Chat({super.key, required this.username});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Welcome Aneeta!',
-          style: TextStyle(
+        title: Text(
+          'Welcome $username!',
+          style: const TextStyle(
             color: Colors.black
           ),
         ),

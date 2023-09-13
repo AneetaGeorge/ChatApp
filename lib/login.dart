@@ -16,7 +16,7 @@ class Login extends StatelessWidget {
         print('Login successful');
         Navigator.push(
             context, MaterialPageRoute(
-            builder: (context) => const Chat()));
+            builder: (context) => Chat(username: usernameController.text)));
       }
   }
 
@@ -66,6 +66,7 @@ class Login extends StatelessWidget {
                         }
                             return null;
                       },
+                      controller: usernameController,
                       decoration: const InputDecoration(
                           hintText: 'Username',
                           border: OutlineInputBorder()
