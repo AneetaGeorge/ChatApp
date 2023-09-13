@@ -37,7 +37,7 @@ class Chat extends StatelessWidget {
               }
             ),
           ),
-          const ChatInput()
+          ChatInput()
         ],
       ),
     );
