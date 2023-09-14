@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/widgets/loginTextField.dart';
+import 'package:flutter_application/widgets/spaces.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});
@@ -25,8 +27,6 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: const Drawer(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => print('Button clicked!'),),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -59,7 +59,7 @@ class Login extends StatelessWidget {
                 key: _formKey,
                 child: Column(
                   children: [
-                    TextFormField(
+                    LoginTextField(
                       validator: (value) {
                         if (value == null || value.isEmpty)
                         {
@@ -68,14 +68,14 @@ class Login extends StatelessWidget {
                             return null;
                       },
                       controller: usernameController,
-                      decoration: const InputDecoration(
-                          hintText: 'Username',
-                          border: OutlineInputBorder()
-                      ),
+                      hintText: 'Username',
                     ),
 
-                    TextFormField(
+                    verticalSpacing(24),
+
+                    LoginTextField(
                       obscureText: true,
+                      hintText: 'Password',
                       validator: (value) {
                         if (value == null || value.isEmpty)
                         {
@@ -84,15 +84,11 @@ class Login extends StatelessWidget {
                         return null;
                       },
                       controller: passwordController,
-                      decoration: const InputDecoration(
-                          hintText: 'Password',
-                          border: OutlineInputBorder()
-                      ),
                     ),
                   ],
                 ),
               ),
-
+              verticalSpacing(24),
               ElevatedButton(
                 onPressed: (){
                   login(context);
