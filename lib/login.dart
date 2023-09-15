@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/widgets/loginTextField.dart';
 import 'package:flutter_application/widgets/spaces.dart';
+import 'package:social_media_buttons/social_media_buttons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Login extends StatelessWidget {
@@ -8,6 +9,8 @@ class Login extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
   final _mainUrl = 'https://aneeta-george.com';
+  final githubUrl = 'https://github.com/AneetaGeorge';
+  final _linkedInUrl = 'https://www.linkedin.com/in/aneetageorge99/';
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -110,6 +113,21 @@ class Login extends StatelessWidget {
                     Text(_mainUrl)
                   ],
                 ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SocialMediaButton.github(onTap: () async {
+                    if (! await launch(githubUrl)) {
+                    throw 'Could not launch URL';
+                    }
+                  }),
+                  SocialMediaButton.linkedin(onTap: () async {
+                    if (! await launch(_linkedInUrl)) {
+                      throw 'Could not launch URL';
+                    }
+                  }, color: Colors.blueAccent)
+                ],
               )
             ],
           ),
