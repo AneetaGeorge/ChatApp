@@ -1,36 +1,45 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_application/entities/authorEntity.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application/entities/chatMessageEntity.dart';
 import 'package:flutter_application/widgets/chatBubble.dart';
 import 'package:flutter_application/widgets/chatInput.dart';
 
-class Chat extends StatelessWidget {
+class Chat extends StatefulWidget {
   const Chat({super.key});
+
+  @override
+  State<Chat> createState() => _ChatState();
+}
+
+class _ChatState extends State<Chat> {
+
+  List<ChatMessage> _messages = [];
+
+  @override
+  void initState() {
+    loadInitialMessages();
+    super.initState();
+  }
+
+  void loadInitialMessages() async {
+    final response = await rootBundle.loadString('assets/chat_messages.json');
+    final List<dynamic> decodedList = jsonDecode(response) as List;
+    final List<ChatMessage> chatMessages = decodedList.map((e){
+      return ChatMessage.fromJson(e);
+    }).toList();
+
+    setState(() {
+      _messages = chatMessages;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
 
     String username = ModalRoute.of(context)!.settings.arguments as String;
-    List<ChatMessage> chatMessages = [ChatMessage(
-        id: '1',
-        text: 'First message',
-        imageUrl: 'https://static.wikia.nocookie.net/mcleodgaming/images/4/41/InuYasha.png/revision/latest?cb=20170820202304',
-        author: Author(username: 'Aneeta'),
-        timestamp: DateTime.now().millisecondsSinceEpoch
-      ),
-      ChatMessage(
-          id: '2',
-          text: 'Second message',
-          author: Author(username: 'Aneeta'),
-          timestamp: DateTime.now().millisecondsSinceEpoch
-      ),
-      ChatMessage(
-          id: '3',
-          text: 'Third message',
-          author: Author(username: 'Jane'),
-          timestamp: DateTime.now().millisecondsSinceEpoch
-      ),
-    ];
+    // List<ChatMessage> chatMessages =
 
     return Scaffold(
       appBar: AppBar(
@@ -55,11 +64,11 @@ class Chat extends StatelessWidget {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: chatMessages.length,
+              itemCount: _messages.length,
               itemBuilder: (context, index) {
                 return ChatBubble(
-                    chatMessage: chatMessages[index],
-                    alignment: username == chatMessages[index].author.username ? Alignment.centerRight : Alignment.centerLeft
+                    chatMessage: _messages[index],
+                    alignment: username == _messages[index].author.username ? Alignment.centerRight : Alignment.centerLeft
                 );
               }
             ),

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "text" : "First message",
+    "imageUrl": "https://static.wikia.nocookie.net/mcleodgaming/images/4/41/InuYasha.png/revision/latest?cb=20170820202304",
+    "author": "Aneeta",
+    "createdAt": 12345
+  },
+
+  {
+    "id": "2",
+    "text" : "Second message",
+    "author": "Aneeta",
+    "createdAt": 12346
+  },
+
+  {
+    "id": "3",
+    "text" : "Third message",
+    "author": "Jane",
+    "createdAt": 12347
+  },
+
+  {
+    "id": "1",
+    "text" : "Fourth message",
+    "author": "Jane",
+    "createdAt": 12348
+  },
+
+  {
+    "id": "1",
+    "text" : "Fifth message",
+    "author": "Aneeta",
+    "createdAt": 12349
+  }
+]
