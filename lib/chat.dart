@@ -35,6 +35,11 @@ class _ChatState extends State<Chat> {
     });
   }
 
+  void onMessageSent(ChatMessage chatMessage) {
+    _messages.add(chatMessage);
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -73,7 +78,7 @@ class _ChatState extends State<Chat> {
               }
             ),
           ),
-          ChatInput()
+          ChatInput(onSendMessage: onMessageSent, username: username)
         ],
       ),
     );
