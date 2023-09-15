@@ -3,7 +3,8 @@ import 'package:flutter_application/entities/imageEntity.dart';
 import 'package:flutter_application/repo/image_repo.dart';
 
 class NetworkImagePicker extends StatelessWidget {
-  const NetworkImagePicker({super.key});
+  final Function(String) onImageSelected;
+  const NetworkImagePicker({super.key, required this.onImageSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,11 @@ class NetworkImagePicker extends StatelessWidget {
                     maxCrossAxisExtent: MediaQuery.of(context).size.width * 0.5),
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
-                  return Image.network(snapshot.data![index].urlSmallSize);
+                  return GestureDetector(
+                      onTap: () {
+                        onImageSelected(snapshot.data![index].urlSmallSize);
+                      },
+                      child: Image.network(snapshot.data![index].urlSmallSize));
                 }
             );
           } else {
