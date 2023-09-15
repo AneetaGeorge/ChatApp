@@ -8,4 +8,8 @@ class ChatMessage {
   String? imageUrl;
 
   ChatMessage({required this.id, required this.text, required this.author, required this.timestamp, this.imageUrl});
+
+  factory ChatMessage.fromJson(Map<String,dynamic> json) {
+    return ChatMessage(id: json['id'], text: json['text'], imageUrl: json['imageUrl'], author: Author.fromJson(json), timestamp: json['createdAt']);
+  }
 }
