@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/entities/authorEntity.dart';
+import 'package:flutter_application/entities/chatMessageEntity.dart';
 import 'package:flutter_application/widgets/chatBubble.dart';
 import 'package:flutter_application/widgets/chatInput.dart';
 
@@ -25,7 +27,7 @@ class Chat extends StatelessWidget {
               onPressed: (){
                 Navigator.pushReplacementNamed(context, '/');
               },
-              icon: Icon(Icons.logout)
+              icon: const Icon(Icons.logout)
           )
         ],
       ),
@@ -36,7 +38,13 @@ class Chat extends StatelessWidget {
               itemCount: 6,
               itemBuilder: (context, index) {
                 return ChatBubble(
-                    message: 'First message',
+                    chatMessage: ChatMessage(
+                        id: '123',
+                        text: 'First message',
+                        imageUrl: 'https://static.wikia.nocookie.net/mcleodgaming/images/4/41/InuYasha.png/revision/latest?cb=20170820202304',
+                        author: Author(username: username),
+                        timestamp: DateTime.now().millisecondsSinceEpoch
+                    ),
                     alignment: index % 2 == 0 ? Alignment.centerLeft : Alignment.centerRight
                 );
               }

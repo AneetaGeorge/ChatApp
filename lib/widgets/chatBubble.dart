@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/entities/chatMessageEntity.dart';
 
 class ChatBubble extends StatelessWidget {
-  final String message;
+  final ChatMessage chatMessage;
   final Alignment alignment;
-  const ChatBubble({super.key, required this.message, required this.alignment});
+  const ChatBubble({super.key, required this.chatMessage, required this.alignment});
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +26,17 @@ class ChatBubble extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-                '$message',
+                '${chatMessage.text}',
                 style: const TextStyle(
                     fontSize: 14
                 )
             ),
-            Image.network(
-              'https://static.wikia.nocookie.net/mcleodgaming/images/4/41/InuYasha.png/revision/latest?cb=20170820202304',
+            if(chatMessage.imageUrl != null )
+              Image.network(
+                '${chatMessage.imageUrl}',
+              // 'https://static.wikia.nocookie.net/mcleodgaming/images/4/41/InuYasha.png/revision/latest?cb=20170820202304',
               height: 200,)
+
           ],
         ),
       ),
