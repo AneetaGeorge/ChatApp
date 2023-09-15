@@ -1,5 +1,6 @@
 import 'dart:convert';
-
+import 'package:flutter_application/entities/imageEntity.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application/entities/chatMessageEntity.dart';
@@ -20,6 +21,7 @@ class _ChatState extends State<Chat> {
   @override
   void initState() {
     loadInitialMessages();
+    _getNetworkImages();
     super.initState();
   }
 
@@ -40,9 +42,23 @@ class _ChatState extends State<Chat> {
     setState(() {});
   }
 
+  void _getNetworkImages() async {
+    Uri url = Uri.parse('https://pixelford.com/api/2/images');
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final List<dynamic> decodedList = jsonDecode(response.body) as List;
+      final List<PixelFordImage> imageList = decodedList.map((e){
+        return PixelFordImage.fromJson(e);
+      }).toList();
+
+      print(imageList[0].urlFullSize);
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
-
     String username = ModalRoute.of(context)!.settings.arguments as String;
     // List<ChatMessage> chatMessages =
 
