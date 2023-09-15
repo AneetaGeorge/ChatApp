@@ -50,9 +50,8 @@ class Login extends StatelessWidget {
                   letterSpacing: 0.5
                 ),
               ),
-              Image.network(
-                'https://www.olark.com/img/views/index/howitworks/ChatinRealTime_img.jpg',
-                height: 200,
+              Image.asset(
+                'assets/illustration.png'
               ),
 
               Form(
