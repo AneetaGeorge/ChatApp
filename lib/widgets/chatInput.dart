@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/entities/authorEntity.dart';
 import 'package:flutter_application/entities/chatMessageEntity.dart';
+import 'package:flutter_application/widgets/image_picker.dart';
 
 class ChatInput extends StatelessWidget {
   final Function(ChatMessage) onSendMessage;
@@ -31,7 +32,11 @@ class ChatInput extends StatelessWidget {
       child: Row (
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          IconButton(onPressed: (){}, icon: const Icon(Icons.add, color: Colors.white,)),
+          IconButton(onPressed: (){
+            showModalBottomSheet(context: context, builder: (BuildContext context) {
+              return NetworkImagePicker();
+            });
+          }, icon: const Icon(Icons.add, color: Colors.white,)),
            Expanded(child: TextField(
             controller: chatMessageController,
             keyboardType: TextInputType.multiline,
