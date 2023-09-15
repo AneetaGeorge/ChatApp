@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/widgets/loginTextField.dart';
 import 'package:flutter_application/widgets/spaces.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});
 
   final _formKey = GlobalKey<FormState>();
+  final _mainUrl = 'https://aneeta-george.com';
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -96,6 +98,19 @@ class Login extends StatelessWidget {
                   'Login'
                 )
               ),
+              GestureDetector(
+                onTap: () async {
+                  if (! await launch(_mainUrl)) {
+                    throw 'Could not launch URL';
+                  }
+                },
+                child: Column (
+                  children: [
+                    const Text('Find us on'),
+                    Text(_mainUrl)
+                  ],
+                ),
+              )
             ],
           ),
         )
