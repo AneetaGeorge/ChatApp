@@ -11,6 +11,26 @@ class Chat extends StatelessWidget {
   Widget build(BuildContext context) {
 
     String username = ModalRoute.of(context)!.settings.arguments as String;
+    List<ChatMessage> chatMessages = [ChatMessage(
+        id: '1',
+        text: 'First message',
+        imageUrl: 'https://static.wikia.nocookie.net/mcleodgaming/images/4/41/InuYasha.png/revision/latest?cb=20170820202304',
+        author: Author(username: 'Aneeta'),
+        timestamp: DateTime.now().millisecondsSinceEpoch
+      ),
+      ChatMessage(
+          id: '2',
+          text: 'Second message',
+          author: Author(username: 'Aneeta'),
+          timestamp: DateTime.now().millisecondsSinceEpoch
+      ),
+      ChatMessage(
+          id: '3',
+          text: 'Third message',
+          author: Author(username: 'Jane'),
+          timestamp: DateTime.now().millisecondsSinceEpoch
+      ),
+    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -35,17 +55,11 @@ class Chat extends StatelessWidget {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: 6,
+              itemCount: chatMessages.length,
               itemBuilder: (context, index) {
                 return ChatBubble(
-                    chatMessage: ChatMessage(
-                        id: '123',
-                        text: 'First message',
-                        imageUrl: 'https://static.wikia.nocookie.net/mcleodgaming/images/4/41/InuYasha.png/revision/latest?cb=20170820202304',
-                        author: Author(username: username),
-                        timestamp: DateTime.now().millisecondsSinceEpoch
-                    ),
-                    alignment: index % 2 == 0 ? Alignment.centerLeft : Alignment.centerRight
+                    chatMessage: chatMessages[index],
+                    alignment: username == chatMessages[index].author.username ? Alignment.centerRight : Alignment.centerLeft
                 );
               }
             ),
