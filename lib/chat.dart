@@ -44,6 +44,7 @@ class _ChatState extends State<Chat> {
     String username = ModalRoute.of(context)!.settings.arguments as String;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           'Welcome $username!',
@@ -70,7 +71,8 @@ class _ChatState extends State<Chat> {
               itemBuilder: (context, index) {
                 return ChatBubble(
                     chatMessage: _messages[index],
-                    alignment: username == _messages[index].author.username ? Alignment.centerRight : Alignment.centerLeft
+                    alignment: username == _messages[index].author.username ? Alignment.centerRight : Alignment.centerLeft,
+                    color: username == _messages[index].author.username ? Theme.of(context).primaryColor : Colors.black87,
                 );
               }
             ),

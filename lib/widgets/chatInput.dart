@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/entities/authorEntity.dart';
 import 'package:flutter_application/entities/chatMessageEntity.dart';
-import 'package:flutter_application/widgets/image_picker.dart';
+import 'package:flutter_application/widgets/imagePicker.dart';
 
 class ChatInput extends StatefulWidget {
   final Function(ChatMessage) onSendMessage;
