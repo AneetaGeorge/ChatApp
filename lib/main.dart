@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/chat.dart';
 import 'package:flutter_application/login.dart';
+import 'package:flutter_application/services/authService.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const ChatApp());
+void main() async {
+  //Calling this method as AuthService.init() is interacting with native code (Shared Preferences)
+  WidgetsFlutterBinding.ensureInitialized();
+  await AuthService.init();
+  runApp(Provider(
+    create: (BuildContext context) => AuthService(),
+    child: const ChatApp(),
+    )
+  );
 }
 
 class ChatApp extends StatelessWidget {
@@ -23,7 +32,7 @@ class ChatApp extends StatelessWidget {
       ),
       home: Login(),
       routes: {
-        '/chat': (context) => Chat()
+        '/chat': (context) => const Chat()
       },
     );
   }

@@ -2,8 +2,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application/entities/chatMessageEntity.dart';
+import 'package:flutter_application/services/authService.dart';
 import 'package:flutter_application/widgets/chatBubble.dart';
 import 'package:flutter_application/widgets/chatInput.dart';
+import 'package:provider/provider.dart';
 
 class Chat extends StatefulWidget {
   const Chat({super.key});
@@ -41,13 +43,13 @@ class _ChatState extends State<Chat> {
 
   @override
   Widget build(BuildContext context) {
-    String username = ModalRoute.of(context)!.settings.arguments as String;
+    String? userName = context.read<AuthService>().getUser();
 
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          'Welcome $username!',
+          'Welcome $userName!',
           style: const TextStyle(
             color: Colors.black
           ),
@@ -57,6 +59,7 @@ class _ChatState extends State<Chat> {
         actions: [
           IconButton(
               onPressed: (){
+                context.read<AuthService>().logoutUser();
                 Navigator.pushReplacementNamed(context, '/');
               },
               icon: const Icon(Icons.logout)
@@ -68,16 +71,16 @@ class _ChatState extends State<Chat> {
           Expanded(
             child: ListView.builder(
               itemCount: _messages.length,
-              itemBuilder: (context, index) {
+              itemBuilder: (context, index)  {
                 return ChatBubble(
                     chatMessage: _messages[index],
-                    alignment: username == _messages[index].author.username ? Alignment.centerRight : Alignment.centerLeft,
-                    color: username == _messages[index].author.username ? Theme.of(context).primaryColor : Colors.black87,
+                    alignment:  userName == _messages[index].author.username ? Alignment.centerRight : Alignment.centerLeft,
+                    color: userName == _messages[index].author.username ? Theme.of(context).primaryColor : Colors.black87,
                 );
               }
             ),
           ),
-          ChatInput(onSendMessage: onMessageSent, username: username)
+          ChatInput(onSendMessage: onMessageSent, username: userName!)
         ],
       ),
     );

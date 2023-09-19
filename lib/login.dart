@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/services/authService.dart';
 import 'package:flutter_application/widgets/loginTextField.dart';
 import 'package:flutter_application/widgets/spaces.dart';
+import 'package:provider/provider.dart';
 import 'package:social_media_buttons/social_media_buttons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -14,14 +16,15 @@ class Login extends StatelessWidget {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  void login(context)
-  {
+  void login(BuildContext context) {
     if (_formKey.currentState != null && _formKey.currentState!.validate())
       {
+        String userName = usernameController.text;
+        context.read<AuthService>().loginUser(userName);
         Navigator.pushReplacementNamed(
             context,
             '/chat',
-          arguments: usernameController.text
+          arguments: userName
         );
       }
   }

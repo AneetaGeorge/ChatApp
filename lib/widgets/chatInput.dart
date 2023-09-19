@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/entities/authorEntity.dart';
 import 'package:flutter_application/entities/chatMessageEntity.dart';
+import 'package:flutter_application/services/authService.dart';
 import 'package:flutter_application/widgets/imagePicker.dart';
+import 'package:provider/provider.dart';
 
 class ChatInput extends StatefulWidget {
   final Function(ChatMessage) onSendMessage;
@@ -16,11 +18,12 @@ class _ChatInputState extends State<ChatInput> {
   final chatMessageController = TextEditingController();
   String selectedImageUrl = '';
 
-  void sendMessage() {
+  void sendMessage()  {
+    String? userName = context.read<AuthService>().getUser();
     final chatMessage = ChatMessage(
         id: '12',
         text: chatMessageController.text,
-        author: Author(username: widget.username),
+        author: Author(username: userName!),
         timestamp: DateTime.now().millisecondsSinceEpoch
     );
 
